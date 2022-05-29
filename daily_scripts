@@ -1,0 +1,40 @@
+#Get node name
+nodeName=AdminControl.getNode()
+print nodeName;
+#To Query details of the server
+objn = AdminControl.completeObjectName('WebSphere:type=Server,*')
+print objn; 
+print AdminControl.getAttribute(objn, 'nodeName')
+AdminControl.queryNames("node="+AdminControl.getNode( )+",type=Server,*" )
+
+#===========Immediate stopping fo server====================
+
+AdminControl.stopServer(serverName, 'immediate')
+AdminControl.stopServer(serverName, nodeName, 'immediate')
+
+#==================Graceful stop =====================
+
+AdminControl.stopServer(serverName, nodeName)
+
+
+
+#==This operation can only be performed on a Managed Process. The node name is a required argument===
+
+AdminControl.stopServer(serverName, nodeName, 'terminate')
+
+
+
+#========= To start Server==========
+AdminControl.startServer(serverName, nodeName)
+
+
+#===========CLUSTER OPERATIONS ========
+Cluster = AdminControl.completeObjectName('cell='+ cell +',type=Cluster,name='+ cluster +',*')
+state = AdminControl.getAttribute(Cluster, 'state')
+
+#==To startCluster===
+AdminControl.invoke(Cluster ,'start')
+AdminControl.invoke(Cluster ,'rippleStart')
+
+#===To stop cluster======
+AdminControl.invoke(Cluster ,'stop')
