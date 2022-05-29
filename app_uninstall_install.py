@@ -14,6 +14,7 @@ if a1==1:
         print("App is not uninstalled try in mannual method")
 elif a1==2:
     nameapp=input("Enter the Application name: ");
+    #if location is differnet try to make it as an input parameter
     deploy_app="/opt/IBM/WebSphere/AppServer/installableApps/"+nameapp;
     AdminApp.install(deploy_app, '[-cluster cluster1 -server webtest1]')
     AdminConfig.save()
